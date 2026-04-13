@@ -5,8 +5,11 @@
     <title>Mano biblioteka</title>
 </head>
 <body>
-<h1>Mano biblioteka</h1>
+<h1 style="color: red">Mano biblioteka</h1>
 <p>Sveiki atvykę į mano biblioteką</p>
-
+<h2>Darbuotojai:</h2>
+{% for zmogus in zmones %}
+<p>{{ zmogus }}</p>
+{% endfor %}
 </body>
 </html>
