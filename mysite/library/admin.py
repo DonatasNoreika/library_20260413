@@ -10,6 +10,8 @@ class BookInstanceInLine(admin.TabularInline):
 class BookAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'isbn']
     inlines = [BookInstanceInLine]
+    list_filter = ['author']
+    search_fields = ['title']
 
 admin.site.register(Author)
 admin.site.register(Genre)
