@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Knyga{% endblock %}
+
+{% block content %}
+<h1>{{ book.title }}</h1>
+<p>Autorius: {{ book.author }}</p>
+<p>ISBN: {{ book.isbn }}</p>
+<p>{{ book.summary }}</p>
+<h2>Knygos egzemplioriai</h2>
+{% for instance in book.instances.all %}
+<p>{{ instance.uuid }} - {{ instance.get_status_display }}</p>
+{% endfor %}
+{% endblock %}
