@@ -1,10 +1,14 @@
 from django.shortcuts import render
+from .models import Book, BookInstance, Author
 
 # Create your views here.
 
 def index(request):
     context = {
-        'zmones': ['Tomas', "Rokas", "Ainis", "Dar kažkas"],
+        'num_books': Book.objects.count(),
+        'num_instances': BookInstance.objects.count(),
+        'num_authors': Author.objects.count(),
+        'num_instances_available': BookInstance.objects.filter(status='a').count(),
     }
     return render(request, template_name="index.html", context=context)
 

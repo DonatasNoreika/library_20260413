@@ -7,9 +7,10 @@
 <body>
 <h1 style="color: red">Mano biblioteka</h1>
 <p>Sveiki atvykę į mano biblioteką</p>
-<h2>Darbuotojai:</h2>
-{% for zmogus in zmones %}
-<p>{{ zmogus }}</p>
-{% endfor %}
+<h2>Bibliotekos statistika:</h2>
+<p>Knygų: {{ num_books }}</p>
+<p>Knygų egzempliorių: {{ num_instances }}</p>
+<p>Autorių: {{ num_authors }}</p>
+<p>Laisvų knygų: {{ num_instances_available }}</p>
 </body>
 </html>
