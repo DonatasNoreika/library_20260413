@@ -2,13 +2,14 @@ from django.contrib.auth.models import User
 from django.db import models
 import uuid
 from django.utils import timezone
+from tinymce.models import HTMLField
 
 # Create your models here.
 
 class Author(models.Model):
     first_name = models.CharField()
     last_name = models.CharField()
-    description = models.TextField(default="")
+    description = HTMLField(default="")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
