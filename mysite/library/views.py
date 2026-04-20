@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from .models import Book, BookInstance, Author
 from django.views import generic
 from django.urls import reverse_lazy
@@ -72,6 +72,19 @@ class BookInstanceCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.Cr
     template_name = "instance_form.html"
     fields = ['book', 'due_back', 'reader', 'status']
     success_url = reverse_lazy('instances')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class BookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = BookInstance
+    template_name = "instance_form.html"
+    fields = ['book', 'due_back', 'reader', 'status']
+    # success_url = reverse_lazy('instances')
+
+    def get_success_url(self):
+        return reverse("instance", kwargs={"pk": self.object.pk})
 
     def test_func(self):
         return self.request.user.is_staff
