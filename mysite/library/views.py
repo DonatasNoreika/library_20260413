@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
 from .models import Book, BookInstance, Author
 from django.views import generic
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -61,6 +62,16 @@ class BookInstanceDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.De
     model = BookInstance
     template_name = "instance.html"
     context_object_name = "instance"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class BookInstanceCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
+    model = BookInstance
+    template_name = "instance_form.html"
+    fields = ['book', 'due_back', 'reader', 'status']
+    success_url = reverse_lazy('instances')
 
     def test_func(self):
         return self.request.user.is_staff
