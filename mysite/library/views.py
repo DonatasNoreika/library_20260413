@@ -3,6 +3,7 @@ from django.shortcuts import render, reverse
 from .models import Book, BookInstance, Author
 from django.views import generic
 from django.urls import reverse_lazy
+from .forms import InstanceCreateUpdateForm
 
 # Create your views here.
 
@@ -70,7 +71,8 @@ class BookInstanceDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.De
 class BookInstanceCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
     model = BookInstance
     template_name = "instance_form.html"
-    fields = ['book', 'due_back', 'reader', 'status']
+    # fields = ['book', 'due_back', 'reader', 'status']
+    form_class = InstanceCreateUpdateForm
     success_url = reverse_lazy('instances')
 
     def test_func(self):
@@ -80,7 +82,8 @@ class BookInstanceCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.Cr
 class BookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = BookInstance
     template_name = "instance_form.html"
-    fields = ['book', 'due_back', 'reader', 'status']
+    # fields = ['book', 'due_back', 'reader', 'status']
+    form_class = InstanceCreateUpdateForm
     # success_url = reverse_lazy('instances')
 
     def get_success_url(self):
