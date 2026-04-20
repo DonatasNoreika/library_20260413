@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
 from .models import Book, BookInstance, Author
 from django.views import generic
@@ -46,3 +46,12 @@ class MyBookInstanceListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return BookInstance.objects.filter(reader=self.request.user)
+
+
+class BookInstanceListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
+    model = BookInstance
+    template_name = "instances.html"
+    context_object_name = "instances"
+
+    def test_func(self):
+        return self.request.user.is_staff

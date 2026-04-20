@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Administravimas{% endblock %}
+
+{% block content %}
+<h1>Administravimas</h1>
+{% for instance in instances %}
+<p>{{ instance }}</p>
+{% endfor %}
+{% endblock %}
