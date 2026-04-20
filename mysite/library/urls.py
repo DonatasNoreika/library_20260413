@@ -9,4 +9,5 @@ urlpatterns = [
     path("books/<int:pk>/", views.BookDetailView.as_view(), name="book"),
     path("mybooks/", views.MyBookInstanceListView.as_view(), name="mybooks"),
     path("instances/", views.BookInstanceListView.as_view(), name="instances"),
+    path("instances/<int:pk>/", views.BookInstanceDetailView.as_view(), name="instance"),
 ]

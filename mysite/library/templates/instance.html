@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Knygos egzempliorius{% endblock %}
+
+{% block content %}
+<h1>{{ instance.book }}</h1>
+<p>Autorius: {{ instance.book.author }}</p>
+<p>UUID: {{ instance.uuid }}</p>
+<p>Būsena: {{ instance.get_status_display }}</p>
+<p>Skaitytojas: {{ instance.reader }}</p>
+<p>Bus grąžinta: {{ instance.due_back }}</p>
+{% endblock %}
