@@ -5,6 +5,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from .forms import InstanceCreateUpdateForm
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -108,3 +109,13 @@ class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     template_name = "signup.html"
     success_url = reverse_lazy("login")
+
+
+class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = User
+    fields = ['first_name', 'last_name', 'email']
+    template_name = "profile.html"
+    success_url = reverse_lazy("profile")
+
+    def get_object(self, queryset = ...):
+        return self.request.user
