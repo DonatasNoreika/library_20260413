@@ -4,6 +4,7 @@ from .models import Book, BookInstance, Author
 from django.views import generic
 from django.urls import reverse_lazy
 from .forms import InstanceCreateUpdateForm
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -101,3 +102,9 @@ class BookInstanceDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.De
 
     def test_func(self):
         return self.request.user.is_staff
+
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    template_name = "signup.html"
+    success_url = reverse_lazy("login")
