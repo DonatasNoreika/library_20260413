@@ -4,8 +4,23 @@
 
 {% block content %}
 <h1 class="display-3">Knygos:</h1>
+<div class="row">
 {% for book in books %}
-<!--<p><a href="{% url 'book' book.pk %}">{{ book.title }}</a></p>-->
-<p><a href="{{ book.pk }}">{{ book.title }}</a></p>
+    <div class="col-md-4 d-flex align-items-stretch">
+        <div class="card mb-4" style="width: 400px">
+            {% if book.cover %}
+            <img class="card-img-top" src="{{ book.cover.url }}" alt="Card image" style="width:100%">
+            {% else %}
+            {% load static %}
+            <img class="card-img-top" src="{% static 'img/no-image.png' %}" alt="Card image" style="width:100%">
+            {% endif %}
+            <div class="card-body">
+              <h4 class="card-title">{{ book.title }}</h4>
+              <p class="card-text">{{ book.author }}</p>
+              <a href="{{ book.pk }}" class="btn btn-primary">Peržiūrėti</a>
+            </div>
+        </div>
+    </div>
 {% endfor %}
+</div>
 {% endblock %}
